@@ -142,3 +142,25 @@ def clear_api_cache() -> bool:
             time.sleep(0.05 * (attempt + 1))
     return False
 
+
+TTS_CACHE_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "tts_cache")
+
+def clear_tts_cache() -> bool:
+    """
+    Clear all cached TTS audio files in the tts_cache directory.
+    """
+    try:
+        if os.path.exists(TTS_CACHE_DIR):
+            for filename in os.listdir(TTS_CACHE_DIR):
+                if filename.endswith(".mp3"):
+                    try:
+                        os.remove(os.path.join(TTS_CACHE_DIR, filename))
+                    except Exception as e:
+                        logger.warning(f"Could not remove cached audio file {filename}: {e}")
+            logger.info("TTS audio cache cleared.")
+            return True
+    except Exception as e:
+        logger.error(f"Error clearing TTS audio cache: {e}")
+    return False
+
+

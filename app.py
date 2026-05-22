@@ -316,6 +316,8 @@ with _c2:
 with _c3:
     if st.button("🧹", key="clear_cache", help="Clear API response cache & chat history"):
         clear_api_cache()
+        from utils.cache import clear_tts_cache
+        clear_tts_cache()
         st.session_state.messages       = []
         st.session_state.tts_cache      = {}
         st.session_state.auto_tts_bytes    = None

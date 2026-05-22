@@ -30,3 +30,6 @@ utils/api_cache.json
 # Local interview specifications and resume
 100x Interview Voice Bot Plan Readme.pdf
 Mohd_Afrid_Resume (1).pdf
+
+# Audio Cache
+tts_cache/
