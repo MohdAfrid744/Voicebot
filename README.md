@@ -1,6 +1,6 @@
 # 🎙️ Afrid | Interactive Resume Voicebot
 
-An interactive, high-fidelity portfolio voicebot for **Mohd Afrid** (AI/ML Engineer). Built using **Streamlit**, **Google Gemini (Gemini 2.5 Flash)** for reasoning & native multimodal audio transcription, and **Microsoft Edge Neural TTS (`edge-tts`)** for conversational voice outputs.
+An interactive, high-fidelity portfolio voicebot for **Mohd Afrid** (AI/ML Engineer). Built using **Streamlit**, **Google Gemini (Gemini 1.5 Flash)** for reasoning & native multimodal audio transcription, and **Microsoft Edge Neural TTS (`edge-tts`)** for conversational voice outputs.
 
 The system is specifically designed to run on a **Free API tier**, implementing advanced local caching and concurrent network optimizations to remain highly responsive and budget-friendly.
 
@@ -90,8 +90,8 @@ Open `.env` and configure your API key. (Get your free key from [Google AI Studi
 # Gemini API Key
 GEMINI_API_KEY=AIzaSyYourGeminiApiKeyHere
 
-# Gemini Model configuration (Optional, defaults to gemini-2.5-flash)
-GEMINI_MODEL=gemini-2.5-flash
+# Gemini Model configuration (Optional, defaults to gemini-1.5-flash)
+GEMINI_MODEL=gemini-1.5-flash
 ```
 
 ### 6. Run the Application

@@ -13,7 +13,7 @@ load_dotenv()
 # The SDK automatically uses GEMINI_API_KEY from environment variables
 client = genai.Client()
 
-MODEL = os.environ.get("GEMINI_MODEL", "gemini-2.5-flash")
+MODEL = os.environ.get("GEMINI_MODEL", "gemini-1.5-flash")
 
 
 def get_response(conversation_history: list[dict]) -> str:
@@ -58,10 +58,7 @@ def get_response(conversation_history: list[dict]) -> str:
     except Exception as e:
         elapsed = time.time() - start
         logger.error(f"LLM error after {elapsed:.2f}s: {e}")
-        error_msg = str(e)
-        if "503" in error_msg or "UNAVAILABLE" in error_msg or "high demand" in error_msg.lower():
-            return "The AI service is currently experiencing high demand. Please try again in a moment."
-        return "Sorry, I am having trouble connecting to the AI service right now. Please try again."
+        return f"[Error reaching AI: {e}]"
 
 
 def get_response_stream(conversation_history: list[dict]):
@@ -115,11 +112,7 @@ def get_response_stream(conversation_history: list[dict]):
     except Exception as e:
         elapsed = time.time() - start
         logger.error(f"Streaming error after {elapsed:.2f}s: {e}")
-        error_msg = str(e)
-        if "503" in error_msg or "UNAVAILABLE" in error_msg or "high demand" in error_msg.lower():
-            yield "The AI service is currently experiencing high demand. Please try again in a moment."
-        else:
-            yield "Sorry, I am having trouble connecting to the AI service right now. Please try again."
+        yield f"[Error reaching AI: {e}]"
 
 
 def transcribe_audio(audio_bytes: bytes, filename: str = "audio.webm") -> str:
