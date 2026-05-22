@@ -1,0 +1,32 @@
+# Environment variables and secrets
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+logs/
+
+# Python caching
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# Streamlit configurations
+.streamlit/
+
+# OS metadata
+.DS_Store
+Thumbs.db
+
+# Project-specific caches
+utils/api_cache.json
+
+# Local interview specifications and resume
+100x Interview Voice Bot Plan Readme.pdf
+Mohd_Afrid_Resume (1).pdf
