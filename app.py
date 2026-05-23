@@ -196,8 +196,7 @@ html, body, [class*="css"] {
 }
 
 /* ── Suggestion chip buttons — key override ── */
-div[data-testid="stHorizontalBlock"] button[kind="secondary"],
-div[data-testid="stHorizontalBlock"] .stButton > button {
+.st-key-suggestion_chips button {
     background: rgba(99,102,241,0.1) !important;
     border: 1px solid rgba(99,102,241,0.25) !important;
     color: #a5b4fc !important;
@@ -212,8 +211,7 @@ div[data-testid="stHorizontalBlock"] .stButton > button {
     height: auto !important;
     line-height: 1.4 !important;
 }
-div[data-testid="stHorizontalBlock"] button[kind="secondary"]:hover,
-div[data-testid="stHorizontalBlock"] .stButton > button:hover {
+.st-key-suggestion_chips button:hover {
     background: rgba(99,102,241,0.2) !important;
     border-color: rgba(99,102,241,0.5) !important;
     color: #c7d2fe !important;
@@ -345,21 +343,23 @@ SUGGESTIONS = [
     "How do you push limits?",
 ]
 
-# Row 1 — first 3
-row1 = st.columns(3)
-for col, s in zip(row1, SUGGESTIONS[:3]):
-    with col:
-        if st.button(s, key=f"chip_{s}", use_container_width=True):
-            logger.info(f"Chip → '{s}'")
-            st.session_state.pending_input = {"text": s, "source": "chip"}
+# Wrap suggestion chips in a keyed container so their custom CSS styles don't leak into st.audio_input
+with st.container(key="suggestion_chips"):
+    # Row 1 — first 3
+    row1 = st.columns(3)
+    for col, s in zip(row1, SUGGESTIONS[:3]):
+        with col:
+            if st.button(s, key=f"chip_{s}", use_container_width=True):
+                logger.info(f"Chip → '{s}'")
+                st.session_state.pending_input = {"text": s, "source": "chip"}
 
-# Row 2 — last 2, centred with padding columns
-_, c1, c2, _ = st.columns([0.5, 2, 2, 0.5])
-for col, s in zip([c1, c2], SUGGESTIONS[3:]):
-    with col:
-        if st.button(s, key=f"chip_{s}", use_container_width=True):
-            logger.info(f"Chip → '{s}'")
-            st.session_state.pending_input = {"text": s, "source": "chip"}
+    # Row 2 — last 2, centred with padding columns
+    _, c1, c2, _ = st.columns([0.5, 2, 2, 0.5])
+    for col, s in zip([c1, c2], SUGGESTIONS[3:]):
+        with col:
+            if st.button(s, key=f"chip_{s}", use_container_width=True):
+                logger.info(f"Chip → '{s}'")
+                st.session_state.pending_input = {"text": s, "source": "chip"}
 
 st.markdown('<hr class="thin-hr">', unsafe_allow_html=True)
 
